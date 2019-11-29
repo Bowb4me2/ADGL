@@ -44,7 +44,7 @@ void Placeholder::forward()
 
 	if (all_complete) 
 	{
-		this->operation->operation();
+		//this->operation->operation();
 		for (unsigned int i = 0; i < this->number_of_successors; i++)
 		{
 			this->successors[i]->operation_completed = true;
