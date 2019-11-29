@@ -5,7 +5,7 @@ class Operator
 {
 
 public:
-	
+
 	void operator()();
 
 	virtual void operation() = 0;
