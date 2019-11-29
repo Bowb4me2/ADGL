@@ -1,6 +1,7 @@
 #ifndef __OPERATOR_H__
 #define __OPERATOR_H_
 #include "../Node.h"
+
 class Operator 
 {
 
