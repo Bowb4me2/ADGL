@@ -4,25 +4,26 @@
 #include "tensor/Tensor.h"
 #include "graphs/DirectedGraph.h"
 #include "graphs/GraphBuilder.h"
+#include"graphs/nodes/operators/Add.h"
 
 
 
 int main() 
 {
 
+	Add add;
 
+	Tensor t1(30.f);
 
-	Tensor t1(1);
+	Tensor t2(33.0f);
 
-	Tensor t2(1);
-
-	Tensor t3(1);
+	Tensor t3(0.0f);
 
 	Constant constant1(t1);
 
 	Constant constant2(t2);
 
-	Placeholder placeholder(t3);
+	Placeholder placeholder(t3, add);
 
 	GraphBuilder settings;
 
@@ -36,7 +37,7 @@ int main()
 
 	settings.link(constant2, placeholder);
 
-	std::cout << "hello 18 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
+	std::cout << "hello 20 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
 	
 	DirectedGraph g(settings);
 
@@ -44,5 +45,6 @@ int main()
 	
 	std::cout << std::endl << settings.sinks[0]->get_number_of_predecessors();
 
+	std::cout << std::endl << settings.sinks[0]->get_contents()->get_contents();
 
 }

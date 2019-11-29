@@ -25,7 +25,11 @@ public:
 
 	void clear();
 
+	void add(Tensor* arg0);
+
 	// void reshape(Shape shape);
+
+	float get_contents();
 
 };
 

@@ -1,12 +1,23 @@
 #include "Tensor.h"
 
-Tensor::Tensor(float contents_) : contents(contents_)
+Tensor::Tensor(float contents)
 {
-	
-	this->size = 1;
+	this->contents = contents;
 
+	this->size = 1;
 }
 
 void Tensor::clear()
 {
+	this->contents = 0;
+}
+
+void Tensor::add(Tensor* arg0)
+{
+	this->contents += arg0->contents;
+}
+
+float Tensor::get_contents()
+{
+	return this->contents;
 }

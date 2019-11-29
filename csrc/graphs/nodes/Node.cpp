@@ -17,9 +17,11 @@ void Node::link(Node* predecessor, Node* successor)
 	
 	successor->number_of_predecessors++;
 
-	predecessor->successors.push_back(new Edge(predecessor, successor));
+	Edge* edge = new Edge(predecessor, successor);
+
+	predecessor->successors.push_back(edge);
 	
-	successor->predecessors.push_back(new Edge(successor, predecessor));
+	successor->predecessors.push_back(edge);
 }
 
 // public Node()

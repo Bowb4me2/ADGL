@@ -38,13 +38,13 @@ void Placeholder::forward()
 	bool all_complete = true;
 
 	for (unsigned int i = 0; i < this->number_of_predecessors; i++) 
-	{
+	{	
 		all_complete = all_complete && this->predecessors[i]->operation_completed;
 	}
-
+	
 	if (all_complete) 
 	{
-		//this->operation->operation();
+		this->operation->operation(this->get_predecessor_tensors(), this->contents);
 		for (unsigned int i = 0; i < this->number_of_successors; i++)
 		{
 			this->successors[i]->operation_completed = true;
