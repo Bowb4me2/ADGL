@@ -37,7 +37,7 @@ int main()
 
 	settings.link(constant2, placeholder);
 
-	std::cout << "hello 21 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
+	std::cout << "hello 20 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
 	
 	DirectedGraph g(settings);
 
