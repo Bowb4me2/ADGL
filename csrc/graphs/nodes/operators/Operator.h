@@ -1,5 +1,5 @@
 #ifndef __OPERATOR_H__
-#define __OPERATOR_H_
+#define __OPERATOR_H__
 #include "../Node.h"
 
 class Operator 
@@ -7,13 +7,13 @@ class Operator
 
 public:
 
-	void operator()();
+	virtual void operation(std::vector<Tensor*> args, Tensor* result) = 0;
 
-	virtual void operation() = 0;
+	virtual void derivative(std::vector<Tensor*> args, std::vector<Tensor*> results) = 0;
 
-	virtual void derivative() = 0;
+	unsigned int number_of_predecessors;
 
-	Node* parent;
+	unsigned int number_of_successors;
 
 };
 
