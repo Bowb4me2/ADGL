@@ -11,9 +11,7 @@
 int main() 
 {
 
-	Add add;
-
-	Tensor t1(30.f);
+	Tensor t1(21.1f);
 
 	Tensor t2(33.0f);
 
@@ -23,7 +21,7 @@ int main()
 
 	Constant constant2(t2);
 
-	Placeholder placeholder(t3, add);
+	Placeholder placeholder(t3, Add());
 
 	GraphBuilder settings;
 
@@ -37,12 +35,14 @@ int main()
 
 	settings.link(constant2, placeholder);
 
-	std::cout << "hello 21 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
+	std::cout << "hello 23 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
 	
 	DirectedGraph g(settings);
 
 	g.forward();
 	
+	g.backward();
+
 	std::cout << std::endl << settings.sinks[0]->get_number_of_predecessors();
 
 	std::cout << std::endl << settings.sinks[0]->get_contents()->get_contents();

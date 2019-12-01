@@ -6,6 +6,8 @@ DirectedGraph::DirectedGraph()
 
 DirectedGraph::DirectedGraph(GraphBuilder settings)
 {
+	settings.init();
+
 	this->sinks = settings.sinks;
 
 	this->sources = settings.sources;
@@ -15,8 +17,16 @@ DirectedGraph::DirectedGraph(GraphBuilder settings)
 
 void DirectedGraph::forward()
 {
-	for (int i = 0; i < this->sources.size(); i++) 
+	for (unsigned int i = 0; i < this->sources.size(); i++) 
 	{
 		this->sources[i]->forward();
+	}
+}
+
+void DirectedGraph::backward()
+{
+	for (unsigned int i = 0; i < this->sinks.size(); i++)
+	{
+		this->sinks[i]->backward();
 	}
 }

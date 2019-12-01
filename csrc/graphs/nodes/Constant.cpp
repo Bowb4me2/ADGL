@@ -10,6 +10,10 @@ void Constant::addSuccessor(Node& successor)
 	link(this, &successor);
 }
 
+void Constant::init()
+{
+}
+
 void Constant::clear()
 {
 }

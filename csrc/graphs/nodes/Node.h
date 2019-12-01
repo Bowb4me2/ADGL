@@ -52,6 +52,8 @@ public:
 	void reset();
 
 	void full_reset();
+	
+	virtual void init() = 0;
 
 	virtual void clear() = 0;
 

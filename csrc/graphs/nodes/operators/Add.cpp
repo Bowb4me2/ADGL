@@ -1,7 +1,7 @@
 #include "Add.h"
 
 void Add::operation(std::vector<Tensor*> args, Tensor* result)
-{
+{	
 	for (int i = 0; i < args.size(); i++) 
 	{
 		result->add(args[i]);

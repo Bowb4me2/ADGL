@@ -28,6 +28,8 @@ public:
 
 	void link(Node& predecessor, Node& successor);
 
+	void init();
+
 	GraphBuilder& operator=(GraphBuilder& a);
 
 };

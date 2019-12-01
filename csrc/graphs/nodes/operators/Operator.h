@@ -7,13 +7,11 @@ class Operator
 
 public:
 
+	Operator();
+
 	virtual void operation(std::vector<Tensor*> args, Tensor* result) = 0;
 
 	virtual void derivative(std::vector<Tensor*> args, std::vector<Tensor*> results) = 0;
-
-	unsigned int number_of_predecessors;
-
-	unsigned int number_of_successors;
 
 };
 

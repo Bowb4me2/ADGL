@@ -8,6 +8,10 @@ class Placeholder : public Node
 
 protected:
 
+	Tensor* grad;
+
+	std::vector<Tensor*> operation_grads;
+
 	Operator* operation;
 
 public:
@@ -20,11 +24,18 @@ public:
 
 	void addSuccessor(Node& successor);
 
+	void init() override;
+
 	void clear() override;
 
 	void forward() override;
 
 	void backward() override;
+
+	Tensor* get_grad();
+
+	void add_grad(Tensor* grad);
+
 };
 
 #endif

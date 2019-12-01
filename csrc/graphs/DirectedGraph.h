@@ -24,6 +24,8 @@ public:
 
 	void forward();
 
+	void backward();
+
 };
 
 #endif

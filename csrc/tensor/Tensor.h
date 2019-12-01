@@ -27,6 +27,8 @@ public:
 
 	void add(Tensor* arg0);
 
+	void multiply(Tensor* arg0);
+
 	// void reshape(Shape shape);
 
 	float get_contents();

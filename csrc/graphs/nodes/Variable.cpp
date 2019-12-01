@@ -10,6 +10,10 @@ void Variable::addSuccessor(Node& successor)
 	link(this, &successor);
 }
 
+void Variable::init()
+{
+}
+
 void Variable::clear()
 {
 }

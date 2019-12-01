@@ -29,6 +29,14 @@ void GraphBuilder::link(Node& predecessor, Node& successor)
 	Node::link(&predecessor, &successor);
 }
 
+void GraphBuilder::init()
+{
+	for (unsigned int i = 0; i < this->nodes.size(); i++) 
+	{
+		this->nodes[i]->init();
+	}
+}
+
 GraphBuilder& GraphBuilder::operator=(GraphBuilder& a)
 {
 	return a;

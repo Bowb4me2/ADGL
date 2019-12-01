@@ -28,6 +28,7 @@ void Node::link(Node* predecessor, Node* successor)
 // default constructor for Nodes
 Node::Node() : successors(), predecessors()
 {
+
 	this->contents = nullptr;
 
 	this->number_of_successors = 0;
@@ -60,6 +61,7 @@ Tensor* Node::get_contents()
 // returns vector of pointers to the tensors of this nodes predecessors
 std::vector<Tensor*> Node::get_predecessor_tensors()
 {
+
 	std::vector<Tensor*> x;
 
 	for (unsigned int i = 0; i < this->number_of_predecessors; i++) 
@@ -68,6 +70,7 @@ std::vector<Tensor*> Node::get_predecessor_tensors()
 	}
 
 	return x;
+
 }
 
 void Node::reset()

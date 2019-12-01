@@ -11,6 +11,8 @@ public:
 
 	void addSuccessor(Node& predececssor);
 
+	void init() override;
+
 	void clear() override;
 
 	void forward() override;
