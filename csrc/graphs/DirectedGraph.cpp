@@ -21,6 +21,12 @@ void DirectedGraph::forward()
 	{
 		this->sources[i]->forward();
 	}
+
+	for (unsigned int i = 0; i < this->sinks.size(); i++)
+	{
+		this->sinks[i]->reset();
+	}
+
 }
 
 void DirectedGraph::backward()
@@ -29,4 +35,10 @@ void DirectedGraph::backward()
 	{
 		this->sinks[i]->backward();
 	}
+
+	for (unsigned int i = 0; i < this->sinks.size(); i++)
+	{
+		this->sinks[i]->reset();
+	}
+
 }

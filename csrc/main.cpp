@@ -17,9 +17,9 @@ int main()
 
 	Tensor t3(0.0f);
 
-	Constant constant1(t1);
+	Variable constant1(t1);
 
-	Constant constant2(t2);
+	Variable constant2(t2);
 
 	Placeholder placeholder(t3, Add());
 

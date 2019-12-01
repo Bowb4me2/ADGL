@@ -1,4 +1,5 @@
 #include "Placeholder.h"
+#include "Variable.h"
 
 Placeholder::Placeholder(Tensor& contents) : Node()
 {
@@ -91,6 +92,8 @@ void Placeholder::backward()
 	{
 		for (unsigned int i = 0; i < this->number_of_predecessors; i++) 
 		{
+			
+			this->predecessors[i]->operation_completed = true;
 
 			this->operation->derivative(this->get_predecessor_tensors(), this->operation_grads);
 
@@ -102,6 +105,12 @@ void Placeholder::backward()
 				dynamic_cast<Placeholder*>(this->predecessors[i]->predecessor)->add_grad(this->operation_grads[i]);
 			
 			}
+			else if (dynamic_cast<Variable*>(this->predecessors[i]->predecessor) != nullptr)
+			{
+				dynamic_cast<Variable*>(this->predecessors[i]->predecessor)->add_grad(this->operation_grads[i]);
+			}
+
+			this->predecessors[i]->predecessor->backward();
 
 		}
 	}

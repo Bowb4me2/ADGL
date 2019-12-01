@@ -5,6 +5,10 @@
 class Variable : public Node 
 {
 
+protected:
+
+	Tensor* grad;
+
 public:
 
 	Variable(Tensor& contents);
@@ -14,6 +18,8 @@ public:
 	void init() override;
 
 	void clear() override;
+
+	void add_grad(Tensor* arg0);
 
 	void forward() override;
 
