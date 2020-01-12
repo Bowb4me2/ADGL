@@ -24,6 +24,10 @@ public:
 
 	void addSuccessor(Node& successor);
 
+	void reset_sink();
+
+	void reset() override;
+
 	void init() override;
 
 	void clear() override;
@@ -31,6 +35,8 @@ public:
 	void forward() override;
 
 	void backward() override;
+
+	void set_grad(float* grad);
 
 	Tensor* get_grad();
 

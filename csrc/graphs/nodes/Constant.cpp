@@ -22,7 +22,7 @@ void Constant::forward()
 {
 	for (unsigned int i = 0; i < this->number_of_successors; i++)
 	{
-		this->successors[i]->operation_completed = true;
+		this->successors[i]->visited = true;
 		this->successors[i]->successor->forward();
 	}
 }

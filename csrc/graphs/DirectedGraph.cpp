@@ -17,28 +17,30 @@ DirectedGraph::DirectedGraph(GraphBuilder settings)
 
 void DirectedGraph::forward()
 {
+	
+	for (unsigned int i = 0; i < this->sinks.size(); i++)
+	{
+		this->sinks[i]->full_reset();
+	}
+	
 	for (unsigned int i = 0; i < this->sources.size(); i++) 
 	{
 		this->sources[i]->forward();
-	}
-
-	for (unsigned int i = 0; i < this->sinks.size(); i++)
-	{
-		this->sinks[i]->reset();
 	}
 
 }
 
 void DirectedGraph::backward()
 {
+	
 	for (unsigned int i = 0; i < this->sinks.size(); i++)
 	{
-		this->sinks[i]->backward();
+		dynamic_cast<Placeholder*>(this->sinks[i])->reset_sink();
 	}
 
 	for (unsigned int i = 0; i < this->sinks.size(); i++)
 	{
-		this->sinks[i]->reset();
+		this->sinks[i]->backward();
 	}
 
 }

@@ -17,7 +17,7 @@ protected:
 
 		Edge(Node* p, Node* s);
 
-		bool operation_completed;
+		bool visited;
 		
 		Node* predecessor;
 
@@ -49,7 +49,7 @@ public:
 
 	std::vector<Tensor*> get_predecessor_tensors();
 	
-	void reset();
+	virtual void reset() = 0;
 
 	void full_reset();
 	

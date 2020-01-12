@@ -9,11 +9,15 @@ protected:
 
 	Tensor* grad;
 
+	Tensor* learning_rate;
+
 public:
 
 	Variable(Tensor& contents);
 
 	void addSuccessor(Node& predececssor);
+
+	void reset() override;
 
 	void init() override;
 

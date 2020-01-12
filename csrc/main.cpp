@@ -4,12 +4,38 @@
 #include "tensor/Tensor.h"
 #include "graphs/DirectedGraph.h"
 #include "graphs/GraphBuilder.h"
-#include"graphs/nodes/operators/Add.h"
+#include "graphs/nodes/operators/Add.h"
+#include "graphs/nodes/operators/Multiply.h"
 
 
-
-int main() 
+class KL 
 {
+
+public:
+
+	KL() 
+	{
+		print_size();
+		ints.push_back(new int());
+		print_size();
+	}
+
+	void print_size() 
+	{
+		std::cout << "KL size: " << this->ints.size() << "\n";
+	}
+protected:
+	std::vector<int*> ints;
+
+};
+
+int main()
+{
+
+
+	//KL kl;
+
+	//kl.print_size();
 
 	Tensor t1(21.1f);
 
@@ -17,34 +43,53 @@ int main()
 
 	Tensor t3(0.0f);
 
+	Tensor t4(0.0f);
+
 	Variable constant1(t1);
 
 	Variable constant2(t2);
 
-	Placeholder placeholder(t3, Add());
+	Add oper;
+
+	Multiply mul;
+
+	Placeholder placeholder(t3, oper);
+
+	Placeholder sink(t4, oper);
 
 	GraphBuilder settings;
 
-	settings.add_sink(placeholder);
+	settings.add_placeholder(placeholder);
 
 	settings.add_source(constant1);
 
 	settings.add_source(constant2);
 
+	settings.add_sink(sink);
+
 	settings.link(constant1, placeholder);
 
 	settings.link(constant2, placeholder);
 
-	std::cout << "hello 23 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
-	
+	settings.link(constant1, sink);
+
+	settings.link(placeholder, sink);
+
+	std::cout << "hello 26 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
+
 	DirectedGraph g(settings);
 
-	g.forward();
+	for (unsigned int i = 0; i < 20; i++)
+	{
+
+		g.forward();
+
+		g.backward();
+
+		std::cout << "Output: " << settings.sinks[0]->get_contents()->get_contents() << std::endl;
 	
-	g.backward();
+	}
 
-	std::cout << std::endl << settings.sinks[0]->get_number_of_predecessors();
-
-	std::cout << std::endl << settings.sinks[0]->get_contents()->get_contents();
+	std::cout << "const1 Val: " << constant1.get_contents()->get_contents() << std::endl;
 
 }

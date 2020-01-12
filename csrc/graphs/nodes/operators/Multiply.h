@@ -1,13 +1,13 @@
-#ifndef __ADD_H__
-#define __ADD_H__
+#ifndef __MULTIPLY_H__
+#define __MULTIPLY_H__
 #include "Operator.h"
 
-class Add : public Operator 
+class Multiply : public Operator
 {
 
 public:
 
-	Add();
+	Multiply();
 
 	void operation(std::vector<Tensor*> args, Tensor* result) override;
 

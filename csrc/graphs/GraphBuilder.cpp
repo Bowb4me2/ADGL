@@ -14,9 +14,13 @@ void GraphBuilder::add_source(Node& source)
 
 void GraphBuilder::add_sink(Placeholder& sink)
 {
+	
 	this->sinks.push_back(&sink);
 	
 	this->nodes.push_back(&sink);
+
+	(&sink)->set_grad(new float(1.0f));
+
 }
 
 void GraphBuilder::add_placeholder(Placeholder& placeholder)

@@ -5,7 +5,7 @@
 // constructor for edges with predecessor and sucessor nodes
 Node::Edge::Edge(Node* p, Node* s) : predecessor(p), successor(s) 
 {
-	this->operation_completed = false;
+	this->visited = false;
 }
 
 // protected void Node::link(Node*, Node*)
@@ -73,21 +73,17 @@ std::vector<Tensor*> Node::get_predecessor_tensors()
 
 }
 
-void Node::reset()
-{
-	for (unsigned int i = 0; i < this->number_of_predecessors; i++) 
-	{
-		this->predecessors[i]->operation_completed = false;
-		this->predecessors[i]->predecessor->reset();
-	}
-}
-
 void Node::full_reset()
 {
+
+	this->clear();
+
 	for (unsigned int i = 0; i < this->number_of_predecessors; i++)
 	{
-		this->predecessors[i]->operation_completed = false;
-		this->predecessors[i]->predecessor->clear();
+
+		this->predecessors[i]->visited = false;
+
 		this->predecessors[i]->predecessor->full_reset();
+
 	}
 }
