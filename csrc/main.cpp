@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "graphs/nodes/Constant.h"
 #include "graphs/nodes/Placeholder.h"
 #include "tensor/Tensor.h"
@@ -8,35 +9,9 @@
 #include "graphs/nodes/operators/Multiply.h"
 
 
-class KL 
-{
-
-public:
-
-	KL() 
-	{
-		print_size();
-		ints.push_back(new int());
-		print_size();
-	}
-
-	void print_size() 
-	{
-		std::cout << "KL size: " << this->ints.size() << "\n";
-	}
-protected:
-	std::vector<int*> ints;
-
-};
-
 int main()
 {
-
-
-	//KL kl;
-
-	//kl.print_size();
-
+	
 	Tensor t1(21.1f);
 
 	Tensor t2(33.0f);
@@ -44,6 +19,8 @@ int main()
 	Tensor t3(0.0f);
 
 	Tensor t4(0.0f);
+
+	std::cout << t1.get_shape().get_size() + 1 << std::endl;
 
 	Variable constant1(t1);
 
@@ -93,3 +70,7 @@ int main()
 	std::cout << "const1 Val: " << constant1.get_contents()->get_contents() << std::endl;
 
 }
+
+
+
+

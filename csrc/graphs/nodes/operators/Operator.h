@@ -2,12 +2,15 @@
 #define __OPERATOR_H__
 #include "../Node.h"
 
+
 class Operator 
 {
 
 public:
 	
 	std::vector<Tensor*> constants;
+
+	void init();
 
 	virtual void operation(std::vector<Tensor*> args, Tensor* result) = 0;
 

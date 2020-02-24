@@ -1,6 +1,6 @@
 #ifndef __TENSOR_H__
 #define __TENSOR_H__
-//#include "Shape.h"
+#include "Shape.h"
 
 class Tensor 
 {
@@ -9,15 +9,19 @@ protected:
 
 	unsigned int size;
 
-	// Shape shape;
+	Shape shape;
 
 	float* contents;
 
 public:
-	
-	Tensor();
 
 	Tensor(float contents);
+
+	Tensor(unsigned int size);
+
+	Tensor(unsigned int size, float contents);
+
+	Tensor(Shape shape);
 
 	static void add(Tensor* result, Tensor* arg0, Tensor* arg1);
 
@@ -27,15 +31,11 @@ public:
 
 	static void divide(Tensor* result, Tensor* arg0, Tensor* arg1);
 
-	// Tensor(unsigned int size);
+	static void sum(Tensor* result, Tensor* arg0);
 
-	// Tensor(Shape shape);
+	
 
 	void clear();
-
-	//void add(Tensor* arg0);
-
-	//void multiply(Tensor* arg0);
 
 	// void reshape(Shape shape);
 
@@ -44,6 +44,10 @@ public:
 	void set_contents(float* arg0);
 
 	float get_contents();
+
+	unsigned int get_size();
+
+	Shape get_shape();
 
 };
 

@@ -67,10 +67,14 @@ void Placeholder::reset()
 
 void Placeholder::init()
 {
+
+	this->operation->init();
+
 	for (unsigned int i = 0; i < this->number_of_predecessors; i++) 
 	{
 		this->operation_grads.push_back(new Tensor(0.0f));
 	}
+
 }
 
 void Placeholder::clear()

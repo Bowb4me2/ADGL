@@ -16,11 +16,13 @@
     <ClCompile Include="csrc\graphs\nodes\Constant.cpp" />
     <ClCompile Include="csrc\graphs\nodes\Node.cpp" />
     <ClCompile Include="csrc\graphs\nodes\operators\Add.cpp" />
+    <ClCompile Include="csrc\graphs\nodes\operators\MeanSquaredError.cpp" />
     <ClCompile Include="csrc\graphs\nodes\operators\Multiply.cpp" />
     <ClCompile Include="csrc\graphs\nodes\operators\Operator.cpp" />
     <ClCompile Include="csrc\graphs\nodes\Placeholder.cpp" />
     <ClCompile Include="csrc\graphs\nodes\Variable.cpp" />
     <ClCompile Include="csrc\main.cpp" />
+    <ClCompile Include="csrc\tensor\Shape.cpp" />
     <ClCompile Include="csrc\tensor\Tensor.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -29,10 +31,12 @@
     <ClInclude Include="csrc\graphs\nodes\Constant.h" />
     <ClInclude Include="csrc\graphs\nodes\Node.h" />
     <ClInclude Include="csrc\graphs\nodes\operators\Add.h" />
+    <ClInclude Include="csrc\graphs\nodes\operators\MeanSquaredError.h" />
     <ClInclude Include="csrc\graphs\nodes\operators\Multiply.h" />
     <ClInclude Include="csrc\graphs\nodes\operators\Operator.h" />
     <ClInclude Include="csrc\graphs\nodes\Placeholder.h" />
     <ClInclude Include="csrc\graphs\nodes\Variable.h" />
+    <ClInclude Include="csrc\tensor\Shape.h" />
     <ClInclude Include="csrc\tensor\Tensor.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -72,15 +76,21 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir)</AdditionalLibraryDirectories>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -89,17 +99,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir)</AdditionalLibraryDirectories>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

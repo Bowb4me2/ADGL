@@ -6,7 +6,7 @@ Variable::Variable(Tensor& contents) : Node()
 	
 	this->grad = new Tensor(0.0f);
 
-	//this->learning_rate = new Tensor(0.001f);
+	this->learning_rate = new Tensor(0.001f);
 
 	this->contents = &contents;
 
