@@ -3,9 +3,8 @@
 #include "Node.h"
 #include "operators/Operator.h"
 
-class Placeholder : public Node 
+class Placeholder : public Node
 {
-
 protected:
 
 	Tensor* grad;
@@ -41,7 +40,6 @@ public:
 	Tensor* get_grad();
 
 	void add_grad(Tensor* grad);
-
 };
 
 #endif

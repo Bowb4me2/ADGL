@@ -3,7 +3,7 @@
 
 // public Node::Edge(Node*, Node*)
 // constructor for edges with predecessor and sucessor nodes
-Node::Edge::Edge(Node* p, Node* s) : predecessor(p), successor(s) 
+Node::Edge::Edge(Node* p, Node* s) : predecessor(p), successor(s)
 {
 	this->visited = false;
 }
@@ -14,13 +14,13 @@ Node::Edge::Edge(Node* p, Node* s) : predecessor(p), successor(s)
 void Node::link(Node* predecessor, Node* successor)
 {
 	predecessor->number_of_successors++;
-	
+
 	successor->number_of_predecessors++;
 
 	Edge* edge = new Edge(predecessor, successor);
 
 	predecessor->successors.push_back(edge);
-	
+
 	successor->predecessors.push_back(edge);
 }
 
@@ -28,8 +28,9 @@ void Node::link(Node* predecessor, Node* successor)
 // default constructor for Nodes
 Node::Node() : successors(), predecessors()
 {
-
 	this->contents = nullptr;
+
+	this->shape = nullptr;
 
 	this->number_of_successors = 0;
 
@@ -61,29 +62,24 @@ Tensor* Node::get_contents()
 // returns vector of pointers to the tensors of this nodes predecessors
 std::vector<Tensor*> Node::get_predecessor_tensors()
 {
-
 	std::vector<Tensor*> x;
 
-	for (unsigned int i = 0; i < this->number_of_predecessors; i++) 
+	for (unsigned int i = 0; i < this->number_of_predecessors; i++)
 	{
 		x.push_back(this->predecessors[i]->predecessor->get_contents());
 	}
 
 	return x;
-
 }
 
 void Node::full_reset()
 {
-
 	this->clear();
 
 	for (unsigned int i = 0; i < this->number_of_predecessors; i++)
 	{
-
 		this->predecessors[i]->visited = false;
 
 		this->predecessors[i]->predecessor->full_reset();
-
 	}
 }

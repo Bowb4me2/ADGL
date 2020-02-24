@@ -7,27 +7,26 @@ Multiply::Multiply()
 
 void Multiply::operation(std::vector<Tensor*> args, Tensor* result)
 {
-	for (unsigned int i = 0; i < args.size(); i++) 
+	for (unsigned int i = 0; i < args.size(); i++)
 	{
 		if (i != 0)
 		{
 			Tensor::multiply(result, result, args[i]);
 		}
-		else 
+		else
 		{
 			Tensor::multiply(result, this->constants[0], args[i]);
 		}
 	}
-	
 }
 
 void Multiply::derivative(std::vector<Tensor*> args, std::vector<Tensor*>& results)
 {
-	for (unsigned int i = 0; i < results.size(); i++) 
+	for (unsigned int i = 0; i < results.size(); i++)
 	{
-		for (unsigned int j = 0; i < args.size(); i++) 
+		for (unsigned int j = 0; i < args.size(); i++)
 		{
-			if (i != j) 
+			if (i != j)
 			{
 				if (j != 0)
 				{

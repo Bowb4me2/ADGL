@@ -5,27 +5,26 @@
 
 class Node
 {
-
 private:
 
 protected:
 
-	class Edge 
+	class Edge
 	{
-
 	public:
 
 		Edge(Node* p, Node* s);
 
 		bool visited;
-		
+
 		Node* predecessor;
 
 		Node* successor;
-
 	};
 
 	Tensor* contents;
+
+	Shape* shape;
 
 	unsigned int number_of_successors;
 
@@ -48,11 +47,11 @@ public:
 	Tensor* get_contents();
 
 	std::vector<Tensor*> get_predecessor_tensors();
-	
+
 	virtual void reset() = 0;
 
 	void full_reset();
-	
+
 	virtual void init() = 0;
 
 	virtual void clear() = 0;
@@ -60,7 +59,6 @@ public:
 	virtual void forward() = 0;
 
 	virtual void backward() = 0;
-
 };
 
 #endif

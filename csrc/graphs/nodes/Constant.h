@@ -2,9 +2,8 @@
 #define __CONSTANT_H__
 #include "Node.h"
 
-class Constant : public Node 
+class Constant : public Node
 {
-
 public:
 
 	Constant(Tensor& contents);
@@ -18,7 +17,6 @@ public:
 	void forward() override;
 
 	void backward() override;
-
 };
 
 #endif

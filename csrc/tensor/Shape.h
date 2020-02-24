@@ -2,10 +2,8 @@
 #define __SHAPE_H__
 #include <vector>
 
-
-class Shape 
+class Shape
 {
-
 private:
 
 	unsigned int size;
@@ -13,7 +11,7 @@ private:
 	unsigned int dims;
 
 	std::vector<unsigned int> shape;
-	
+
 public:
 
 	Shape();
@@ -29,7 +27,6 @@ public:
 	unsigned int get_dims();
 
 	std::vector<unsigned int> get_shape();
-
 };
 
 #endif

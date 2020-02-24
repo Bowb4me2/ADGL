@@ -2,9 +2,8 @@
 #define __ADD_H__
 #include "Operator.h"
 
-class Add : public Operator 
+class Add : public Operator
 {
-
 public:
 
 	Add();
@@ -12,7 +11,6 @@ public:
 	void operation(std::vector<Tensor*> args, Tensor* result) override;
 
 	void derivative(std::vector<Tensor*> args, std::vector<Tensor*>& results) override;
-
 };
 
 #endif

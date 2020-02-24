@@ -7,7 +7,6 @@
 
 class GraphBuilder
 {
-
 public:
 
 	std::vector<Node*> sources;
@@ -31,7 +30,6 @@ public:
 	void init();
 
 	GraphBuilder& operator=(GraphBuilder& a);
-
 };
 
 #endif

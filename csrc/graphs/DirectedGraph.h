@@ -7,7 +7,6 @@
 
 class DirectedGraph
 {
-
 private:
 
 	std::vector<Node*> sources;
@@ -25,7 +24,6 @@ public:
 	void forward();
 
 	void backward();
-
 };
 
 #endif

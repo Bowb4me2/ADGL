@@ -8,12 +8,8 @@ MeanSquaredError::MeanSquaredError()
 
 void MeanSquaredError::operation(std::vector<Tensor*> args, Tensor* result)
 {
-	
 }
 
 void MeanSquaredError::derivative(std::vector<Tensor*> args, std::vector<Tensor*>& results)
 {
-	
 }
-
-

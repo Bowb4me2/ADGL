@@ -2,9 +2,8 @@
 #define __TENSOR_H__
 #include "Shape.h"
 
-class Tensor 
+class Tensor
 {
-
 protected:
 
 	unsigned int size;
@@ -33,8 +32,6 @@ public:
 
 	static void sum(Tensor* result, Tensor* arg0);
 
-	
-
 	void clear();
 
 	// void reshape(Shape shape);
@@ -48,7 +45,6 @@ public:
 	unsigned int get_size();
 
 	Shape get_shape();
-
 };
 
 #endif

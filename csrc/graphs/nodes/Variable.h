@@ -2,9 +2,8 @@
 #define __VARIABLE_H__
 #include "Node.h"
 
-class Variable : public Node 
+class Variable : public Node
 {
-
 protected:
 
 	Tensor* grad;
@@ -28,7 +27,6 @@ public:
 	void forward() override;
 
 	void backward() override;
-
 };
 
 #endif

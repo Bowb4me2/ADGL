@@ -8,10 +8,8 @@
 #include "graphs/nodes/operators/Add.h"
 #include "graphs/nodes/operators/Multiply.h"
 
-
 int main()
 {
-	
 	Tensor t1(21.1f);
 
 	Tensor t2(33.0f);
@@ -58,19 +56,12 @@ int main()
 
 	for (unsigned int i = 0; i < 20; i++)
 	{
-
 		g.forward();
 
 		g.backward();
 
 		std::cout << "Output: " << settings.sinks[0]->get_contents()->get_contents() << std::endl;
-	
 	}
 
 	std::cout << "const1 Val: " << constant1.get_contents()->get_contents() << std::endl;
-
 }
-
-
-
-
