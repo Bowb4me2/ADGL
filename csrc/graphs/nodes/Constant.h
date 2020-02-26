@@ -10,6 +10,8 @@ public:
 
 	void addSuccessor(Node& predececssor);
 
+	void reset() override;
+
 	void init() override;
 
 	void clear() override;

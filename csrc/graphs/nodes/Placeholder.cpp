@@ -9,8 +9,6 @@ Placeholder::Placeholder(Tensor& contents) : Node()
 
 	this->contents = &contents;
 
-	this->shape = &contents.get_shape();
-
 	this->operation = nullptr;
 }
 
@@ -21,8 +19,6 @@ Placeholder::Placeholder(Tensor& contents, Operator& opr) : Node()
 	this->grad = new Tensor(0.0f);
 
 	this->contents = &contents;
-
-	this->shape = &contents.get_shape();
 
 	this->operation = &opr;
 }
@@ -61,7 +57,7 @@ void Placeholder::reset()
 
 void Placeholder::init()
 {
-	this->operation->init();
+	this->operation->init(this->get_predecessor_nodes());
 
 	for (unsigned int i = 0; i < this->number_of_predecessors; i++)
 	{
@@ -85,6 +81,7 @@ void Placeholder::forward()
 
 	if (all_complete)
 	{
+
 		this->operation->operation(this->get_predecessor_tensors(), this->contents);
 
 		for (unsigned int i = 0; i < this->number_of_successors; i++)
@@ -121,7 +118,6 @@ void Placeholder::backward()
 			}
 			else if (dynamic_cast<Variable*>(this->predecessors[i]->predecessor) != nullptr)
 			{
-				//std::cout << "placeholder operation grads " << this->operation_grads[i]->get_contents() << std::endl;
 				Tensor::multiply(this->operation_grads[i], this->operation_grads[i], this->grad);
 
 				dynamic_cast<Variable*>(this->predecessors[i]->predecessor)->add_grad(this->operation_grads[i]);

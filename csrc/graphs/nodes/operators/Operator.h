@@ -8,7 +8,7 @@ public:
 
 	std::vector<Tensor*> constants;
 
-	void init();
+	virtual void init(std::vector<Node*> predecessors) = 0;
 
 	virtual void operation(std::vector<Tensor*> args, Tensor* result) = 0;
 

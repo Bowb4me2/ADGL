@@ -8,6 +8,8 @@ public:
 
 	Multiply();
 
+	void init(std::vector<Node*> predecessors) override;
+
 	void operation(std::vector<Tensor*> args, Tensor* result) override;
 
 	void derivative(std::vector<Tensor*> args, std::vector<Tensor*>& results) override;

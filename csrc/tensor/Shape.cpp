@@ -1,4 +1,6 @@
 #include "Shape.h"
+#include <iostream>__msvc_all_public_headers.hpp
+
 
 Shape::Shape() : shape()
 {

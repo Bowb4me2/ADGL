@@ -1,4 +1,5 @@
 #include "GraphBuilder.h"
+#include <iostream>
 
 GraphBuilder::GraphBuilder()
 {

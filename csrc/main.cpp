@@ -7,54 +7,44 @@
 #include "graphs/GraphBuilder.h"
 #include "graphs/nodes/operators/Add.h"
 #include "graphs/nodes/operators/Multiply.h"
+#include "graphs/nodes/operators/MeanSquaredError.h"
 
 int main()
 {
-	Tensor t1(21.1f);
 
-	Tensor t2(33.0f);
+	MeanSquaredError add;
+
+	//Add add;
+
+	//Multiply add;
+	
+	GraphBuilder settings;
+
+	Tensor t1(1.1f);
+
+	Tensor t2(2.0f);
 
 	Tensor t3(0.0f);
 
-	Tensor t4(0.0f);
+	Variable var(t1);
 
-	std::cout << t1.get_shape().get_size() + 1 << std::endl;
+	Constant constant(t2);
 
-	Variable constant1(t1);
-
-	Variable constant2(t2);
-
-	Add oper;
-
-	Multiply mul;
-
-	Placeholder placeholder(t3, oper);
-
-	Placeholder sink(t4, oper);
-
-	GraphBuilder settings;
-
-	settings.add_placeholder(placeholder);
-
-	settings.add_source(constant1);
-
-	settings.add_source(constant2);
+	Placeholder sink(t3, add);
 
 	settings.add_sink(sink);
 
-	settings.link(constant1, placeholder);
+	settings.add_source(var);
 
-	settings.link(constant2, placeholder);
+	settings.add_source(constant);
 
-	settings.link(constant1, sink);
+	settings.link(constant, sink);
 
-	settings.link(placeholder, sink);
-
-	std::cout << "hello 26 " << constant1.get_number_of_successors() << " " << placeholder.get_number_of_predecessors();
+	settings.link(var, sink);
 
 	DirectedGraph g(settings);
 
-	for (unsigned int i = 0; i < 20; i++)
+	for (unsigned int i = 0; i < 400; i++)
 	{
 		g.forward();
 
@@ -62,6 +52,6 @@ int main()
 
 		std::cout << "Output: " << settings.sinks[0]->get_contents()->get_contents() << std::endl;
 	}
-
-	std::cout << "const1 Val: " << constant1.get_contents()->get_contents() << std::endl;
+	
+	std::cout << "variable: " << settings.nodes[01]->get_contents()->get_contents() << "\n";
 }

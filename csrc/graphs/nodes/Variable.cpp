@@ -5,7 +5,7 @@ Variable::Variable(Tensor& contents) : Node()
 {
 	this->grad = new Tensor(0.0f);
 
-	this->learning_rate = new Tensor(0.001f);
+	this->learning_rate = new Tensor(0.01f);
 
 	this->contents = &contents;
 }
@@ -63,7 +63,7 @@ void Variable::backward()
 	if (all_complete)
 	{
 		std::cout << "Variable grad: " << this->grad->get_contents() << std::endl;
-		//Tensor::multiply(this->grad, this->grad, this->learning_rate);
+		Tensor::multiply(this->grad, this->grad, this->learning_rate);
 		Tensor::subtract(this->contents, this->contents, this->grad);
 	}
 }

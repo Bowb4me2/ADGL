@@ -1,4 +1,5 @@
 #include "DirectedGraph.h"
+#include <iostream>
 
 DirectedGraph::DirectedGraph()
 {

@@ -1,5 +1,7 @@
 #include "Node.h"
 #include <typeinfo>
+#include <iostream>
+
 
 // public Node::Edge(Node*, Node*)
 // constructor for edges with predecessor and sucessor nodes
@@ -29,9 +31,7 @@ void Node::link(Node* predecessor, Node* successor)
 Node::Node() : successors(), predecessors()
 {
 	this->contents = nullptr;
-
-	this->shape = nullptr;
-
+	
 	this->number_of_successors = 0;
 
 	this->number_of_predecessors = 0;
@@ -56,6 +56,35 @@ int Node::get_number_of_predecessors()
 Tensor* Node::get_contents()
 {
 	return this->contents;
+}
+
+Shape Node::get_shape() 
+{
+	return this->contents->get_shape();
+}
+
+std::vector<Node*> Node::get_successor_nodes()
+{
+	std::vector<Node*> successors;
+
+	for (unsigned int i = 0; i < this->number_of_successors; i++) 
+	{
+		successors.push_back(this->successors[i]->successor);
+	}
+
+	return successors;
+}
+
+std::vector<Node*> Node::get_predecessor_nodes() 
+{
+	std::vector<Node*> predecessors;
+
+	for (unsigned int i = 0; i < this->number_of_predecessors; i++)
+	{
+		predecessors.push_back(this->predecessors[i]->predecessor);
+	}
+
+	return predecessors;
 }
 
 // public vector<Tensor*> Node::get_predecessor_tensor()

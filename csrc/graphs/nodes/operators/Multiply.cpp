@@ -5,6 +5,10 @@ Multiply::Multiply()
 	this->constants.push_back(new Tensor(1.0f));
 }
 
+void Multiply::init(std::vector<Node*> predecessors)
+{
+}
+
 void Multiply::operation(std::vector<Tensor*> args, Tensor* result)
 {
 	for (unsigned int i = 0; i < args.size(); i++)

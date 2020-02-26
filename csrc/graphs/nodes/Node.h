@@ -24,8 +24,6 @@ protected:
 
 	Tensor* contents;
 
-	Shape* shape;
-
 	unsigned int number_of_successors;
 
 	unsigned int number_of_predecessors;
@@ -45,6 +43,12 @@ public:
 	int get_number_of_predecessors();
 
 	Tensor* get_contents();
+
+	Shape get_shape();
+
+	std::vector<Node*> get_successor_nodes();
+
+	std::vector<Node*> get_predecessor_nodes();
 
 	std::vector<Tensor*> get_predecessor_tensors();
 

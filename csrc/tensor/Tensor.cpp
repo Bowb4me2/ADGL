@@ -1,4 +1,5 @@
 #include "Tensor.h"
+#include <iostream>
 
 Tensor::Tensor(float contents) : shape(1)
 {
