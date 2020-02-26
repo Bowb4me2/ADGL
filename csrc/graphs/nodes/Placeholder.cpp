@@ -5,7 +5,7 @@
 Placeholder::Placeholder(Tensor& contents) : Node()
 {
 	// make sure this has same size on update
-	this->grad = new Tensor(0.0f);
+	this->grad = new Tensor(contents.get_size(), 0.0f);
 
 	this->contents = &contents;
 
@@ -16,7 +16,7 @@ Placeholder::Placeholder(Tensor& contents, Operator& opr) : Node()
 {
 	// same as above comment
 
-	this->grad = new Tensor(0.0f);
+	this->grad = new Tensor(contents.get_size(), 0.0f);
 
 	this->contents = &contents;
 

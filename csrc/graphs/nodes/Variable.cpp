@@ -3,7 +3,7 @@
 
 Variable::Variable(Tensor& contents) : Node()
 {
-	this->grad = new Tensor(0.0f);
+	this->grad = new Tensor(contents.get_size(), 0.0f);
 
 	this->learning_rate = new Tensor(0.01f);
 

@@ -32,6 +32,8 @@ public:
 
 	static void sum(Tensor* result, Tensor* arg0);
 
+	void fill(float arg0);
+
 	void clear();
 
 	// void reshape(Shape shape);

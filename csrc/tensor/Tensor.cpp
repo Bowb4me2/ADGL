@@ -24,6 +24,8 @@ Tensor::Tensor(unsigned int size, float contents) : shape(size)
 	for (unsigned int i = 0; i < this->size; i++)
 	{
 		this->contents[i] = contents;
+
+		std::cout << i << " " << this->contents[i] << "\n";
 	}
 }
 
@@ -144,9 +146,22 @@ void Tensor::sum(Tensor* result, Tensor* arg0)
 	}
 }
 
+void Tensor::fill(float arg0)
+{
+	for (unsigned int i = 0; i < this->size; i++) 
+	{
+		this->contents[i] = arg0;
+	}
+}
+
 void Tensor::clear()
 {
-	this->contents = new float(0.0f);
+	this->contents = new float[this->size];
+
+	for (unsigned int i = 0; i < this->size; i++) 
+	{
+		this->contents[i] = 0.0f;
+	}
 }
 
 void Tensor::set_contents(Tensor* arg0)
@@ -161,7 +176,8 @@ void Tensor::set_contents(float* arg0)
 
 float Tensor::get_contents()
 {
-	return *this->contents;
+	std::cout << "get contents: " << this->contents[0] << " " << this->contents[1] << "\n";
+	return this->contents[0];
 }
 
 unsigned int Tensor::get_size()

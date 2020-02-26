@@ -20,11 +20,13 @@ int main()
 	
 	GraphBuilder settings;
 
-	Tensor t1(1.1f);
+	Tensor t1(2, 1.1f);
 
-	Tensor t2(2.0f);
+	Tensor t2(2, 2.0f);
 
-	Tensor t3(0.0f);
+	Tensor t3(2, 0.0f);
+
+
 
 	Variable var(t1);
 
@@ -44,7 +46,7 @@ int main()
 
 	DirectedGraph g(settings);
 
-	for (unsigned int i = 0; i < 400; i++)
+	for (unsigned int i = 0; i < 40; i++)
 	{
 		g.forward();
 
