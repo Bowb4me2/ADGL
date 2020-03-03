@@ -1,6 +1,7 @@
 #ifndef __TENSOR_H__
 #define __TENSOR_H__
 #include "Shape.h"
+#include <iostream>
 
 class Tensor
 {
@@ -42,11 +43,15 @@ public:
 
 	void set_contents(float* arg0);
 
-	float get_contents();
+	float* get_contents();
 
 	unsigned int get_size();
 
 	Shape get_shape();
+
+	friend std::ostream& operator<<(std::ostream& out, Tensor& arg0);
+
+	friend std::ostream& operator<<(std::ostream& out, Tensor* arg0);
 };
 
 #endif

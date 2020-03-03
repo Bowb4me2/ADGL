@@ -52,8 +52,10 @@ int main()
 
 		g.backward();
 
-		std::cout << "Output: " << settings.sinks[0]->get_contents()->get_contents() << std::endl;
+		std::cout << "Output1: " << settings.sinks[0]->get_contents()->get_contents() << std::endl;
 	}
 	
 	std::cout << "variable: " << settings.nodes[01]->get_contents()->get_contents() << "\n";
+	
+	std::cout << "Joe: " << settings.nodes[1]->get_contents();
 }

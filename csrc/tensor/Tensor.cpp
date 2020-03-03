@@ -24,8 +24,6 @@ Tensor::Tensor(unsigned int size, float contents) : shape(size)
 	for (unsigned int i = 0; i < this->size; i++)
 	{
 		this->contents[i] = contents;
-
-		std::cout << i << " " << this->contents[i] << "\n";
 	}
 }
 
@@ -174,10 +172,10 @@ void Tensor::set_contents(float* arg0)
 	this->contents = arg0;
 }
 
-float Tensor::get_contents()
+float* Tensor::get_contents()
 {
-	std::cout << "get contents: " << this->contents[0] << " " << this->contents[1] << "\n";
-	return this->contents[0];
+	//std::cout << "get contents: " << this->contents[0] << " " << this->contents[1] << "\n";
+	return this->contents;// [0] ;
 }
 
 unsigned int Tensor::get_size()
@@ -188,4 +186,28 @@ unsigned int Tensor::get_size()
 Shape Tensor::get_shape()
 {
 	return this->shape;
+}
+
+std::ostream& operator<<(std::ostream& out, Tensor& arg0)
+{
+	out << "Tensor(";
+
+	for (unsigned int i = 0; i < arg0.size - 1; i++) 
+	{
+		out << arg0.get_contents()[i] << ", ";
+	}
+	out << arg0.get_contents()[arg0.size - 1] << ")\n";
+	return out;
+}
+
+std::ostream& operator<<(std::ostream& out, Tensor* arg0)
+{
+	out << "Tensor(";
+
+	for (unsigned int i = 0; i < arg0->size - 1; i++)
+	{
+		out << arg0->get_contents()[i] << ", ";
+	}
+	out << arg0->get_contents()[arg0->size - 1] << ")\n";
+	return out;
 }
