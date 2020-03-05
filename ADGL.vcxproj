@@ -37,6 +37,7 @@
     <ClInclude Include="csrc\graphs\nodes\Placeholder.h" />
     <ClInclude Include="csrc\graphs\nodes\Variable.h" />
     <ClInclude Include="csrc\tensor\Shape.h" />
+    <ClInclude Include="csrc\tensor\tensor operations\cpu\elementwise_ops.h" />
     <ClInclude Include="csrc\tensor\Tensor.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

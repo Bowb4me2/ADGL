@@ -33,6 +33,8 @@ public:
 
 	static void sum(Tensor* result, Tensor* arg0);
 
+	static void mean(Tensor* result, Tensor* arg0);
+
 	void fill(float arg0);
 
 	void clear();
@@ -52,6 +54,8 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, Tensor& arg0);
 
 	friend std::ostream& operator<<(std::ostream& out, Tensor* arg0);
+
+	~Tensor();
 };
 
 #endif

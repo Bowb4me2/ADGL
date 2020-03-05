@@ -11,9 +11,8 @@ void Constant::addSuccessor(Node& successor)
 	link(this, &successor);
 }
 
-void Constant::reset() 
+void Constant::reset()
 {
-
 }
 
 void Constant::init()
@@ -35,5 +34,9 @@ void Constant::forward()
 }
 
 void Constant::backward()
+{
+}
+
+void Constant::add_grad(Tensor* grad)
 {
 }

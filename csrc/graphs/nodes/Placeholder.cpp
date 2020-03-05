@@ -81,7 +81,6 @@ void Placeholder::forward()
 
 	if (all_complete)
 	{
-
 		this->operation->operation(this->get_predecessor_tensors(), this->contents);
 
 		for (unsigned int i = 0; i < this->number_of_successors; i++)
@@ -94,7 +93,7 @@ void Placeholder::forward()
 }
 
 void Placeholder::backward()
-{
+{	
 	bool all_complete = true;
 
 	for (unsigned int i = 0; i < this->number_of_successors; i++)
@@ -110,18 +109,9 @@ void Placeholder::backward()
 		{
 			this->predecessors[i]->visited = true;
 
-			if (dynamic_cast<Placeholder*>(this->predecessors[i]->predecessor) != nullptr)
-			{
-				Tensor::multiply(this->operation_grads[i], this->operation_grads[i], this->grad);
+			Tensor::multiply(this->operation_grads[i], this->operation_grads[i], this->grad);
 
-				dynamic_cast<Placeholder*>(this->predecessors[i]->predecessor)->add_grad(this->operation_grads[i]);
-			}
-			else if (dynamic_cast<Variable*>(this->predecessors[i]->predecessor) != nullptr)
-			{
-				Tensor::multiply(this->operation_grads[i], this->operation_grads[i], this->grad);
-
-				dynamic_cast<Variable*>(this->predecessors[i]->predecessor)->add_grad(this->operation_grads[i]);
-			}
+			this->predecessors[i]->predecessor->add_grad(this->operation_grads[i]);
 
 			this->predecessors[i]->predecessor->backward();
 		}

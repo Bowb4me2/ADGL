@@ -9,30 +9,23 @@
 #include "graphs/nodes/operators/Multiply.h"
 #include "graphs/nodes/operators/MeanSquaredError.h"
 
+Tensor t1(10, 1.1f);
+
+Tensor t2(10, 2.0f);
+
+Tensor t3(1, 0.0f);
+
 int main()
 {
-
-	MeanSquaredError add;
-
-	//Add add;
-
-	//Multiply add;
+	MeanSquaredError mse;
 	
 	GraphBuilder settings;
-
-	Tensor t1(2, 1.1f);
-
-	Tensor t2(2, 2.0f);
-
-	Tensor t3(2, 0.0f);
-
-
 
 	Variable var(t1);
 
 	Constant constant(t2);
 
-	Placeholder sink(t3, add);
+	Placeholder sink(t3, mse);
 
 	settings.add_sink(sink);
 
@@ -46,16 +39,15 @@ int main()
 
 	DirectedGraph g(settings);
 
-	for (unsigned int i = 0; i < 40; i++)
+	for (unsigned int i = 0; i < 100; i++)
 	{
+		
 		g.forward();
-
+		
 		g.backward();
 
-		std::cout << "Output1: " << settings.sinks[0]->get_contents()->get_contents() << std::endl;
+		std::cout << "Output: " << settings.sinks[0]->get_contents() << std::endl;
+		std::cout << "Variable: " << settings.nodes[1]->get_contents() << std::endl;
+		std::cout << "Constant: " << settings.nodes[2]->get_contents() << std::endl << std::endl;
 	}
-	
-	std::cout << "variable: " << settings.nodes[01]->get_contents()->get_contents() << "\n";
-	
-	std::cout << "Joe: " << settings.nodes[1]->get_contents();
 }

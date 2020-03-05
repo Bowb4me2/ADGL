@@ -62,7 +62,7 @@ void Variable::backward()
 
 	if (all_complete)
 	{
-		std::cout << "Variable grad: " << this->grad->get_contents() << std::endl;
+		//std::cout << "Variable grad: " << this->grad->get_contents() << std::endl;
 		Tensor::multiply(this->grad, this->grad, this->learning_rate);
 		Tensor::subtract(this->contents, this->contents, this->grad);
 	}

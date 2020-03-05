@@ -99,6 +99,7 @@ void Tensor::multiply(Tensor* result, Tensor* arg0, Tensor* arg1)
 	{
 		for (unsigned int i = 0; i < arg0->size; i++)
 		{
+			//std::cout << "i: " << i << " arg0: " << arg0->size << " arg1: " << arg1->size << " result: " << result->size << "\n";
 			result->contents[i] = arg0->contents[i] * arg1->contents[0];
 		}
 	}
@@ -144,9 +145,19 @@ void Tensor::sum(Tensor* result, Tensor* arg0)
 	}
 }
 
+void Tensor::mean(Tensor* result, Tensor* arg0) 
+{
+	for (unsigned int i = 0; i < arg0->size; i++) 
+	{
+		result->contents[0] += arg0->contents[i];
+	}
+	
+	result->contents[0] /= arg0->get_size();
+}
+
 void Tensor::fill(float arg0)
 {
-	for (unsigned int i = 0; i < this->size; i++) 
+	for (unsigned int i = 0; i < this->size; i++)
 	{
 		this->contents[i] = arg0;
 	}
@@ -154,9 +165,7 @@ void Tensor::fill(float arg0)
 
 void Tensor::clear()
 {
-	this->contents = new float[this->size];
-
-	for (unsigned int i = 0; i < this->size; i++) 
+	for (unsigned int i = 0; i < this->size; i++)
 	{
 		this->contents[i] = 0.0f;
 	}
@@ -192,11 +201,11 @@ std::ostream& operator<<(std::ostream& out, Tensor& arg0)
 {
 	out << "Tensor(";
 
-	for (unsigned int i = 0; i < arg0.size - 1; i++) 
+	for (unsigned int i = 0; i < arg0.size - 1; i++)
 	{
 		out << arg0.get_contents()[i] << ", ";
 	}
-	out << arg0.get_contents()[arg0.size - 1] << ")\n";
+	out << arg0.get_contents()[arg0.size - 1] << ")";
 	return out;
 }
 
@@ -208,6 +217,14 @@ std::ostream& operator<<(std::ostream& out, Tensor* arg0)
 	{
 		out << arg0->get_contents()[i] << ", ";
 	}
-	out << arg0->get_contents()[arg0->size - 1] << ")\n";
+
+	out << arg0->get_contents()[arg0->size - 1] << ")";
+
 	return out;
+}
+
+
+Tensor::~Tensor()
+{
+	delete this->contents;
 }

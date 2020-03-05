@@ -22,7 +22,7 @@ public:
 
 	void clear() override;
 
-	void add_grad(Tensor* arg0);
+	void add_grad(Tensor* arg0) override;
 
 	void forward() override;
 

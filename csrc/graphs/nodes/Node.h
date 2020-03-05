@@ -63,6 +63,8 @@ public:
 	virtual void forward() = 0;
 
 	virtual void backward() = 0;
+
+	virtual void add_grad(Tensor* grad) = 0;
 };
 
 #endif

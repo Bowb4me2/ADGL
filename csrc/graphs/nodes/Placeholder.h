@@ -39,7 +39,7 @@ public:
 
 	Tensor* get_grad();
 
-	void add_grad(Tensor* grad);
+	void add_grad(Tensor* grad) override;
 };
 
 #endif

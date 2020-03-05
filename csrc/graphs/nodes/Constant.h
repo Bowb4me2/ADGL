@@ -19,6 +19,8 @@ public:
 	void forward() override;
 
 	void backward() override;
+
+	void add_grad(Tensor* grad) override;
 };
 
 #endif
