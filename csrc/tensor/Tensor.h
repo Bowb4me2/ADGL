@@ -2,6 +2,7 @@
 #define __TENSOR_H__
 #include "Shape.h"
 #include <iostream>
+#include <initializer_list>
 
 class Tensor
 {
@@ -23,6 +24,8 @@ public:
 
 	Tensor(Shape shape);
 
+	Tensor(const std::initializer_list<float>& contents);
+
 	static void add(Tensor* result, Tensor* arg0, Tensor* arg1);
 
 	static void subtract(Tensor* result, Tensor* arg0, Tensor* arg1);
@@ -34,6 +37,12 @@ public:
 	static void sum(Tensor* result, Tensor* arg0);
 
 	static void mean(Tensor* result, Tensor* arg0);
+
+	static void transpose(Tensor* result, Tensor* arg0);
+
+	static void dot(Tensor* result, Tensor* arg0, Tensor* arg1);
+
+	static void outer(Tensor* result, Tensor* arg0, Tensor* arg1);
 
 	void fill(float arg0);
 

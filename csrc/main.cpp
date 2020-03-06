@@ -9,14 +9,25 @@
 #include "graphs/nodes/operators/Multiply.h"
 #include "graphs/nodes/operators/MeanSquaredError.h"
 
-Tensor t1(10, 1.1f);
+Tensor t1({1.1f, 2.1f});
 
-Tensor t2(10, 2.0f);
+Tensor t2(2, 4.0f);
 
 Tensor t3(1, 0.0f);
 
+Tensor test1(4, 2.0f);
+
+Tensor test2(16, 1.0f);
+
+Tensor test3(4, 2.0f);
+
 int main()
 {
+
+	Tensor::outer(&test2, &test1, &test3);
+
+	std::cout << "outer: " << test2 << "\n";
+
 	MeanSquaredError mse;
 	
 	GraphBuilder settings;
@@ -41,7 +52,6 @@ int main()
 
 	for (unsigned int i = 0; i < 100; i++)
 	{
-		
 		g.forward();
 		
 		g.backward();

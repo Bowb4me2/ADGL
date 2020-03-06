@@ -92,6 +92,25 @@ namespace ops
 			result[i] = scalar[0] / arg0[i];
 		}
 	}
+
+	template<typename T>
+	void sum(T* result, T* arg0, unsigned int size) 
+	{
+		for (unsigned int i = 0; i < size; i++) 
+		{
+			result[0] += arg0[i];
+		}
+	}
+
+	template<typename T>
+	void mean(T* result, T* arg0, unsigned int size)
+	{
+		for (unsigned int i = 0; i < size; i++)
+		{
+			result[0] += arg0[i];
+		}
+		result[0] /= size;
+	}
 }
 
 #endif 

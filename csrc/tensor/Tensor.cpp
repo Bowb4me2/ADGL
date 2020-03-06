@@ -1,63 +1,64 @@
 #include "Tensor.h"
+#include "tensor operations/cpu/elementwise_ops.h"
+#include "tensor operations/cpu/matrix_mul_ops.h"
 #include <iostream>
 
-Tensor::Tensor(float contents) : shape(1)
+Tensor::Tensor(float contents) : 
+	shape(1), 
+	size(1), 
+	contents(new float(contents))
 {
-	this->contents = new float(contents);
-
-	this->size = 1;
+//alloc mem here
 }
 
-Tensor::Tensor(unsigned int size) : shape(size)
+Tensor::Tensor(unsigned int size) : 
+	shape(size), 
+	size(size), 
+	contents(new float[size])
 {
-	this->contents = new float[size];
-
-	this->size = size;
+//alloc mem here
 }
 
-Tensor::Tensor(unsigned int size, float contents) : shape(size)
+Tensor::Tensor(unsigned int size, float contents) : 
+	Tensor(size)
 {
-	this->contents = new float[size];
-
-	this->size = size;
-
 	for (unsigned int i = 0; i < this->size; i++)
 	{
 		this->contents[i] = contents;
 	}
 }
 
-Tensor::Tensor(Shape shape)
+Tensor::Tensor(Shape shape) : 
+	shape(shape), 
+	size(shape.get_size()), 
+	contents(new float[shape.get_size()])
 {
-	this->contents = new float[shape.get_size()];
+//alloc mem here
+}
 
-	this->size = shape.get_size();
-
-	this->shape = shape;
+Tensor::Tensor(const std::initializer_list<float>& contents) : 
+	Tensor(static_cast<unsigned int>(contents.size()))
+{
+	int i = 0;
+	for (auto &element : contents) 
+	{
+		this->contents[i++] = element;
+	}
 }
 
 void Tensor::add(Tensor* result, Tensor* arg0, Tensor* arg1)
 {
 	if (arg0->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[0] + arg1->contents[i];
-		}
+		ops::scalar_add<float>(result->contents, arg1->contents, arg0->contents, result->size);
 	}
 	else if (arg1->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[i] + arg1->contents[0];
-		}
+		ops::scalar_add<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 	else
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[i] + arg1->contents[i];
-		}
+		ops::vector_add<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 }
 
@@ -65,24 +66,15 @@ void Tensor::subtract(Tensor* result, Tensor* arg0, Tensor* arg1)
 {
 	if (arg0->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[0] - arg1->contents[i];
-		}
+		ops::scalar_sub<float>(result->contents, arg1->contents, arg0->contents, result->size);
 	}
 	else if (arg1->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[i] - arg1->contents[0];
-		}
+		ops::scalar_sub<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 	else
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[i] - arg1->contents[i];
-		}
+		ops::vector_sub<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 }
 
@@ -90,25 +82,15 @@ void Tensor::multiply(Tensor* result, Tensor* arg0, Tensor* arg1)
 {
 	if (arg0->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[0] * arg1->contents[i];
-		}
+		ops::scalar_mul<float>(result->contents, arg1->contents, arg0->contents, result->size);
 	}
 	else if (arg1->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			//std::cout << "i: " << i << " arg0: " << arg0->size << " arg1: " << arg1->size << " result: " << result->size << "\n";
-			result->contents[i] = arg0->contents[i] * arg1->contents[0];
-		}
+		ops::scalar_mul<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 	else
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[i] * arg1->contents[i];
-		}
+		ops::vector_mul<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 }
 
@@ -116,43 +98,41 @@ void Tensor::divide(Tensor* result, Tensor* arg0, Tensor* arg1)
 {
 	if (arg0->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[0] / arg1->contents[i];
-		}
+		ops::scalar_div<float>(result->contents, arg1->contents, arg0->contents, result->size);
 	}
 	else if (arg1->size == 1)
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[i] / arg1->contents[0];
-		}
+		ops::scalar_div<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 	else
 	{
-		for (unsigned int i = 0; i < arg0->size; i++)
-		{
-			result->contents[i] = arg0->contents[i] / arg1->contents[i];
-		}
+		ops::vector_div<float>(result->contents, arg0->contents, arg1->contents, result->size);
 	}
 }
 
 void Tensor::sum(Tensor* result, Tensor* arg0)
 {
-	for (unsigned int i = 0; i < arg0->size; i++)
-	{
-		result->contents[0] += arg0->contents[i];
-	}
+	ops::sum<float>(result->contents, arg0->contents, result->size);
 }
 
 void Tensor::mean(Tensor* result, Tensor* arg0) 
 {
-	for (unsigned int i = 0; i < arg0->size; i++) 
-	{
-		result->contents[0] += arg0->contents[i];
-	}
-	
-	result->contents[0] /= arg0->get_size();
+	ops::mean<float>(result->contents, arg0->contents, result->size);
+}
+
+void Tensor::transpose(Tensor* result, Tensor* arg0)
+{
+	ops::transpose<float>(result->contents, arg0->contents, arg0->shape.get_shape()[0], arg0->shape.get_shape()[1]);
+}
+
+void Tensor::dot(Tensor* result, Tensor* arg0, Tensor* arg1)
+{
+	ops::dot_product<float>(result->contents, arg0->contents, arg1->contents, arg0->size, arg1->size);
+}
+
+void Tensor::outer(Tensor* result, Tensor* arg0, Tensor* arg1)
+{
+	ops::outer_product<float>(result->contents, arg0->contents, arg1->contents, arg0->size, arg1->size);
 }
 
 void Tensor::fill(float arg0)
@@ -183,8 +163,7 @@ void Tensor::set_contents(float* arg0)
 
 float* Tensor::get_contents()
 {
-	//std::cout << "get contents: " << this->contents[0] << " " << this->contents[1] << "\n";
-	return this->contents;// [0] ;
+	return this->contents;
 }
 
 unsigned int Tensor::get_size()
